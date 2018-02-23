@@ -1,15 +1,14 @@
 module.exports = function solveEquation(equation) {
-var uravnenie =  {
-         answer: [0, 0],
-         a: equation.replace(/\s/g, '').match(/[^\^]\d+/g)[0],
-         b: equation.replace(/\s/g, '').match(/[^\^]\d+/g)[1],
-         c: equation.replace(/\s/g, '').match(/[^\^]\d+/g)[2]
+  equation = equation.split('').filter(function (x) {return x!= " "}).join('').split("x");
+    let a = parseInt(equation[0]);
+    let b = parseInt(equation[1].split('').slice(2, equation[1].length).join(''));
+    let c = parseInt(equation[2]);
+    let Desc = Math.pow(b,2) - 4*a*c;
+      let finalAnswer = [,,];
+    if (Desc>0) {
+      finalAnswer[0] = Math.round(((-1)*b + Math.sqrt(Math.pow(b,2)-4*a*c)) /(2*a));
+      finalAnswer[1] = Math.round(((-1)*b - Math.sqrt(Math.pow(b,2)-4*a*c))/(2*a));
 
-     }
-     uravnenie.answer[0] = Math.round(( (-1) * uravnenie.b + Math.sqrt( Math.pow(uravnenie.b,2) - 4 * uravnenie.a * uravnenie.c)) / (2 * uravnenie.a));
-     uravnenie.answer[1] = Math.round(( (-1) * uravnenie.b - Math.sqrt( Math.pow(uravnenie.b,2) - 4 * uravnenie.a * uravnenie.c)) / (2 * uravnenie.a));
-
-        var finalAnswer=uravnenie.answer.sort((right, left) => {return right - left});
-        return finalAnswer;
-
+    }
+  return finalAnswer.sort(function(x,y) {return x-y});
  }
